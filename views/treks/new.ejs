@@ -1,41 +1,62 @@
 <%layout('layouts/boilerplate')%>
-<div class="row">
-    <h1 class="text-center">New Trek</h1>
-    <div class="col-6 offset-3">
-        <form action="/treks" method="POST">
-            <div class="mb-3">
-                <label class="form-label" for="org">Organization</label>
-                <input class="form-control" type="text" id="org" name="trek[organization]">     
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="trek[title]">     
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input type="text" class="form-control" id="location" name="trek[location]">     
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image Url</label>
-                <input type="text" class="form-control" id="image" name="trek[image]">     
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="price">Enrollment Price</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="price-label">	&#8377</span>
+    <div class="row">
+        <h1 class="text-center">New Trek</h1>
+        <div class="col-6 offset-3">
+            <form action="/treks" method="POST" novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="org">Organization</label>
+                    <input class="form-control" type="text" id="org" name="trek[organization]" required>
+                    <div class="valid-feedback">
+                        Looks-good!
                     </div>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="trek[price]">
-                  </div>    
-            </div>      
-            <div class="mb-3">
-                <label class="form-label" for="description">description</label>
-                <textarea type="text" class="form-control" id="description" name="trek[description]"></textarea> 
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-success">Add Trek</button>
-            </div>
-        </form>
-        <a href="/treks">All Treks</a>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="trek[title]" required>
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="trek[location]" required>
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image Url</label>
+                    <input type="text" class="form-control" id="image" name="trek[image]" required>
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Enrollment Price</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price-label"> &#8377</span>
+                        </div>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="trek[price]" required>
+                    </div>
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">description</label>
+                    <textarea type="text" class="form-control" id="description" name="trek[description]" required></textarea>
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Trek</button>
+                </div>
+            </form>
+            <a href="/treks">All Treks</a>
+        </div>
     </div>
-</div>
+
+    

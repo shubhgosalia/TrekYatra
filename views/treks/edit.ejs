@@ -3,22 +3,34 @@
         <div class="row">
             <h1 class="text-center">Edit Your Trek</h1>
             <div class="col-6 offset-3">
-                <form action="/treks/<%=trek._id%>?_method=PUT" method="POST">
+                <form action="/treks/<%=trek._id%>?_method=PUT" method="POST" novalidate class="validated-form">
                     <div class="mb-3">
                         <label class="form-label" for="org">Organization</label>
-                        <input class="form-control" type="text" id="org" name="trek[organization]" value="<%=trek.organization%>">     
+                        <input class="form-control" type="text" id="org" name="trek[organization]" required value="<%=trek.organization%>">     
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
-                        <input class="form-control" type="text" id="title" name="trek[title]" value="<%=trek.title%>">     
+                        <input class="form-control" type="text" id="title" name="trek[title]" required value="<%=trek.title%>">     
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="location">Location</label>
-                        <input type="text" class="form-control" id="location" name="trek[location]" value="<%=trek.location%>">     
+                        <input type="text" class="form-control" id="location" name="trek[location]" required value="<%=trek.location%>">     
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="image">Image Url</label>
-                        <input type="text" class="form-control" id="image" name="trek[image]" value="<%=trek.image%>">     
+                        <input type="text" class="form-control" id="image" name="trek[image]" required value="<%=trek.image%>">     
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="price">Enrollment Price</label>
@@ -26,13 +38,19 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="price-label">	&#8377</span>
                             </div>
-                            <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="trek[price]"
+                            <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="trek[price]" required
                             value="<%=trek.price%>">
-                          </div>    
+                        </div>
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>    
                     </div>      
                     <div class="mb-3">
                         <label class="form-label" for="description">description</label>
-                        <textarea type="text" class="form-control" id="description" name="trek[description]"><%=trek.description%></textarea> 
+                        <textarea type="text" class="form-control" id="description" name="trek[description]" required ><%=trek.description%></textarea> 
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-success">Update Trek</button>
