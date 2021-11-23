@@ -26,6 +26,7 @@ const seedDB=async()=>{
         const rand=Math.floor(Math.random()*1000);
         const price=Math.floor(Math.random()*3000)+1000
         const tk=new Trek({
+            author:'619cc7ffc2acdaf78c33dbc0',
             location:`${cities[rand].city},${cities[rand].state}`,
             title:`${example(descriptors)} ${example(places)}`,
             image:"https://source.unsplash.com/collection/483251",

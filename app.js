@@ -9,11 +9,14 @@ const methodOverride = require("method-override");
 const {trekSchema,reviewSchema}=require('./schema');
 const Review=require('./models/review');
 const { nextTick } = require("process");
-
+const passport=require("passport");
+const loc_strategy=require("passport-local");
+const User=require("./models/user");
 const treks=require('./routes/trekRoutes');
 const reviews=require('./routes/reviewRoutes');
 const session=require('express-session');
 const flash=require('connect-flash');
+const users=require("./routes/userRoutes");
 mongoose.connect("mongodb://localhost:27017/trek-yatra",
     err => {
         if (err) throw err;
@@ -41,7 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const sessionconfig={
     secret:'this should be a better secret',
     resave:false,
-    saveUninitailized:true,
+    saveUninitialized:true,
     cookie:{
         httpOnly:true,
         expries:Date.now()+1000*60*60*24*7,
@@ -50,15 +53,28 @@ const sessionconfig={
 }
 app.use(session(sessionconfig))
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new loc_strategy(User.authenticate()));
 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+    res.locals.currentUser=req.user;
     res.locals.success=req.flash('success');
     res.locals.error=req.flash('error');
 
     next();
 })
 
+app.get("/fakeUser",async(req,res)=>{
+    const user=new User({email:"a@gmail.com",username:"aa"});
+    const newUser=await User.register(user,"aab");
+    res.send(newUser);
+})
+
+app.use('/',users);
 app.use('/treks',treks);
 app.use('/treks/:id/reviews',reviews);
 
