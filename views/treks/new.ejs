@@ -2,14 +2,14 @@
     <div class="row">
         <h1 class="text-center">New Trek</h1>
         <div class="col-6 offset-3">
-            <form action="/treks" method="POST" novalidate class="validated-form">
-                <div class="mb-3">
+            <form action="/treks" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <!-- <div class="mb-3">
                     <label class="form-label" for="org">Organization</label>
                     <input class="form-control" type="text" id="org" name="trek[organization]" required>
                     <div class="valid-feedback">
                         Looks-good!
                     </div>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
                     <input class="form-control" type="text" id="title" name="trek[title]" required>
@@ -24,13 +24,8 @@
                         Looks-good!
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="image">Image Url</label>
-                    <input type="text" class="form-control" id="image" name="trek[image]" required>
-                    <div class="valid-feedback">
-                        Looks-good!
-                    </div>
-                </div>
+                <!-- <input type="file" name="image" id="" multiple>  -->
+                
                 <div class="mb-3">
                     <label class="form-label" for="price">Enrollment Price</label>
                     <div class="input-group">
@@ -50,6 +45,10 @@
                     <div class="valid-feedback">
                         Looks-good!
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Add images:</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-success">Add Trek</button>
