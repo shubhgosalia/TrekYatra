@@ -7,6 +7,10 @@ const map = new mapboxgl.Map({
     zoom: 10 // starting zoom
 });
 
+//adding map control
+map.addControl(new mapboxgl.NavigationControl());
+
+
 new mapboxgl.Marker()
     .setLngLat(trek.geometry.coordinates)
     .setPopup(

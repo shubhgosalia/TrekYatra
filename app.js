@@ -82,6 +82,10 @@ app.use('/',users);
 app.use('/treks',treks);
 app.use('/treks/:id/reviews',reviews);
 
+app.get('/',(req,res)=>{
+    res.render('landing');
+})
+
 app.all('*',(req,res,next)=>{
     next(new ExpressError('Page not found','404'))
 })

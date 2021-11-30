@@ -1,8 +1,15 @@
 
-<%layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate')%>
 
-<h1>Register</h1>   
-<form action="/register" method="POST" class="validated-form" novalidate>
+<div class="container d-flex justify-content-center align-items-center mt-1 mb-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <img src="https://www.forsythfamilymagazine.com/wp-content/uploads/2020/05/42FF-FireTentAndStars.jpg"
+                    alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">Register</h5>
+                    <form action="/register" method="POST" class="validated-form" novalidate>
     <div class="mb-3">
         <label class="form-label" for="username">Username</label>
         <input class="form-control" type="text" id="username" name="username" required>     
@@ -23,7 +30,11 @@
                 <div class="valid-feedback">
                     Looks-good!
                 </div>
+                </div>
+             <button class="btn btn-success">Register</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<button class="btn btn-success">Register</button>
-
-</form>
