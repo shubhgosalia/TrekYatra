@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
-
 const express = require("express");
 const path = require("path");
 const ejsmate = require("ejs-mate");
@@ -21,13 +20,23 @@ const reviews=require('./routes/reviewRoutes');
 const session=require('express-session');
 const flash=require('connect-flash');
 const users=require("./routes/userRoutes");
+
+var stripe = require('stripe')(process.env.Secret_Key);
+  
+var Publishable_Key =process.env.Publishable_Key
+var Secret_Key = process.env.Secret_Key
+
+  
 mongoose.connect("mongodb://localhost:27017/trek-yatra",
     err => {
         if (err) throw err;
         console.log('connected to MongoDB')
     });
 
-
+//var instance = new Razorpay({
+  //    key_id:process.env.key_id,
+  //    key_secret:process.env.key_secret
+//})
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -72,6 +81,20 @@ app.use((req,res,next)=>{
     next();
 })
 
+//app.post("/payment/:id",async(req,res)=>{
+   // const trek=await Trek.findById(req.params.id);
+
+   // var options = {
+    //    amount: `${trek.price}`,
+    //    currency: "INR",
+    //    receipt: "order_rcptid_11"
+     // };
+    //  instance.orders.create(options, function(err, order) {
+     //   console.log(order);
+     //   res.send({orderId:order.id});
+     // });      
+//})
+
 app.get("/fakeUser",async(req,res)=>{
     const user=new User({email:"a@gmail.com",username:"aa"});
     const newUser=await User.register(user,"aab");
@@ -95,6 +118,39 @@ app.use((err, req, res, next) => {
     if(!err.message) err.message='Something went wrong'
     res.status(statuscode).render('treks/error.ejs',{err});
 });
+
+app.post('/payment', function(req, res){
+  
+    // Moreover you can take more details from user
+    // like Address, Name, etc from form
+    stripe.customers.create({
+        email: req.body.stripeEmail,
+        source: req.body.stripeToken,
+        name: 'Gourav Hammad',
+        address: {
+            line1: 'TC 9/4 Old MES colony',
+            postal_code: '452331',
+            city: 'Indore',
+            state: 'Madhya Pradesh',
+            country: 'India',
+        }
+    })
+    .then((customer) => {
+  
+        return stripe.charges.create({
+            amount: 2500,     // Charing Rs 25
+            description: 'Web Development Product',
+            currency: 'INR',
+            customer: customer.id
+        });
+    })
+    .then((charge) => {
+        res.send("Success")  // If no error occurs
+    })
+    .catch((err) => {
+        res.send(err)       // If some error occurs
+    });
+})
 
 app.listen(3000, () => {
     console.log("Serving on port 3000");

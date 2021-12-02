@@ -6,6 +6,10 @@ const mapBoxToken=process.env.MAPBOX_TOKEN;
 const geocoder=mbxGeocoding({accessToken:mapBoxToken});
 
 
+var Publishable_Key =process.env.Publishable_Key
+var Secret_Key = process.env.Secret_Key
+
+
 
 module.exports.index=async (req, res) => {
     const treks = await Trek.find({});
@@ -47,7 +51,7 @@ module.exports.showTrek=async (req, res) => {
         req.flash('error','Cannot find that trek');
         return res.redirect('/treks');
     }
-    res.render("treks/show", { trek,msg:req.flash('success')});
+    res.render("treks/show", { trek,msg:req.flash('success'),key:Publishable_Key});
 }
 
 module.exports.renderEditForm=async (req, res) => {
