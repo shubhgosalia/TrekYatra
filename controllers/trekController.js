@@ -54,6 +54,36 @@ module.exports.showTrek=async (req, res) => {
     res.render("treks/show", { trek,msg:req.flash('success'),key:Publishable_Key});
 }
 
+module.exports.enrollPayment=async(req,res) => {
+    stripe.customers.create({
+        email: req.body.stripeEmail,
+        source: req.body.stripeToken,
+        name: 'Gourav Hammad',
+        address: {
+            line1: 'TC 9/4 Old MES colony',
+            postal_code: '452331',
+            city: 'Indore',
+            state: 'Madhya Pradesh',
+            country: 'India',
+        }
+    })
+    .then((customer) => {
+  
+        return stripe.charges.create({
+            amount: 2500,
+            description: 'Web Development Product',
+            currency: 'INR',
+            customer: customer.id
+        });
+    })
+    .then((charge) => {
+        res.send("Success")  // If no error occurs
+    })
+    .catch((err) => {
+        res.send(err)       // If some error occurs
+    });
+}
+
 module.exports.renderEditForm=async (req, res) => {
     const {id}=req.params;
     const trek = await Trek.findById(id);

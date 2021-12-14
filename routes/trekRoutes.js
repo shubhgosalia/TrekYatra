@@ -41,6 +41,7 @@ router.route('/:id')
 router.route('/:id/edit')
   .get(isLoggedIn,isAuthor,catchAsync(trekController.renderEditForm));
 
-
+router.route('/payment')
+  .get(isLoggedIn,catchAsync(trekController.enrollPayment));
 
 module.exports=router;
