@@ -3,13 +3,13 @@
         <h1 class="text-center text-muted">New Trek</h1>
         <div class="col-md-6 offset-md-3">
             <form action="/treks" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-                <!-- <div class="mb-3">
+                 <div class="mb-3">
                     <label class="form-label" for="org">Organization</label>
                     <input class="form-control" type="text" id="org" name="trek[organization]" required>
                     <div class="valid-feedback">
                         Looks-good!
                     </div>
-                </div> -->
+                </div> 
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
                     <input class="form-control" type="text" id="title" name="trek[title]" required>
@@ -24,17 +24,16 @@
                         Looks-good!
                     </div>
                 </div>
-                    <!--<div class="mb-3">
+                    <div class="mb-3">
                     <label class="form-label" for="s_date">Start Date</label>
-                    <input type="date" class="form-control" id="s_date" name="trek[start_date]" required>
+                    <input type="text"  placeholder="dd/mm/yyyy" class="form-control" id="s_date" name="trek[start_date]" required>
                     <br>
                     <label class="form-label" for="e_date">End Date</label>
-                    <input type="date" class="form-control" id="e_date" name="trek[end_date]" required>
+                    <input type="text"  placeholder="dd/mm/yyyy" class="form-control" id="e_date" name="trek[end_date]" required>
                     <div class="valid-feedback">
                         Looks-good!
                     </div>
                 </div>
-                 -->
                 <!-- <input type="file" name="image" id="" multiple>  -->
                 <div class="mb-3">
                     <label class="form-label" for="price">Enrollment Price</label>
@@ -61,10 +60,19 @@
                     <input class="form-control" type="file" id="image" name="image" multiple>
                 </div>
                 <div class="mb-5">
-                    <button class="btn btn-success">Add Trek</button>
+                    <button class="btn btn-success" id="add_btn">Add Trek</button>
                 </div>
             </form>
         </div>
     </div>
 
-    
+<script>
+    //const add_button=document.getElementById("add_btn");
+    //const desc=document.getElementById("description");
+    //var maxLength = 15;
+    //var shorten_text;
+    //add_button.addEventListener("click",function(){
+    //    shorten_text=`${desc.textContent.substr(0,maxLength)}....`;
+   // })
+    //module.exports={shorten_text};
+</script>

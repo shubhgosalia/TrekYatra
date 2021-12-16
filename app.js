@@ -20,6 +20,7 @@ const reviews=require('./routes/reviewRoutes');
 const session=require('express-session');
 const flash=require('connect-flash');
 const users=require("./routes/userRoutes");
+const mongoSanitize=require('express-mongo-sanitize');
 
 var stripe = require('stripe')(process.env.Secret_Key);
   
@@ -49,10 +50,13 @@ app.engine("ejs", ejsmate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(mongoSanitize({
+     replaceWith:'_'
+}));
 
 const sessionconfig={
     secret:'this should be a better secret',
@@ -74,6 +78,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+    //console.log(req.query);
     res.locals.currentUser=req.user;
     res.locals.success=req.flash('success');
     res.locals.error=req.flash('error');

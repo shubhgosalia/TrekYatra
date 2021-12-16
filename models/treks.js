@@ -31,6 +31,8 @@ const TrekSchema=new Schema({
     price:Number,
     description:String,
     location:String,
+    start_date:String,
+    end_date:String,
 
     author:{
          type:Schema.Types.ObjectId,

@@ -4,13 +4,13 @@
             <h1 class="text-center text-muted">Edit Your Trek</h1>
             <div class="col-md-6 offset-md-3">
                 <form action="/treks/<%=trek._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-                    <!-- <div class="mb-3">
+                     <div class="mb-3">
                         <label class="form-label" for="org">Organization</label>
                         <input class="form-control" type="text" id="org" name="trek[organization]" required value="<%=trek.organization%>">     
                         <div class="valid-feedback">
                             Looks-good!
                         </div>
-                    </div> -->
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
                         <input class="form-control" type="text" id="title" name="trek[title]" required value="<%=trek.title%>">     
@@ -25,7 +25,18 @@
                             Looks-good!
                         </div>
                     </div>
-                    
+
+                    <div class="mb-3">
+                    <label class="form-label" for="s_date">Start Date</label>
+                    <input type="text"  placeholder="dd/mm/yyyy" class="form-control" id="s_date" name="trek[start_date]" required value="<%=trek.start_date%>">
+                    <br>
+                    <label class="form-label" for="e_date">End Date</label>
+                    <input type="text"  placeholder="dd/mm/yyyy" class="form-control" id="e_date" name="trek[end_date]" required value="<%=trek.end_date%>">
+                    <div class="valid-feedback">
+                        Looks-good!
+                    </div>
+                </div>
+              
                     <div class="mb-3">
                         <label class="form-label" for="price">Enrollment Price</label>
                         <div class="input-group">
@@ -65,6 +76,5 @@
                         <button class="btn btn-success">Update Trek</button>
                     </div>
                 </form>
-                <a href="/treks/<%=trek._id%>">Back to Trek</a>
             </div>
         </div>
