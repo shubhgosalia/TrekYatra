@@ -62,7 +62,7 @@ app.use(mongoSanitize({
 }));
 
 const sessionconfig={
-    secret:'this should be a better secret',
+    secret:'this is a secret',
     resave:false,
     saveUninitialized:true,
     cookie:{
