@@ -3,7 +3,7 @@
         <div class="row">
             <h1 class="text-center text-muted"><%=trek.title%> Enrollment</h1>
             <div class="col-md-6 offset-md-3 pt-3">
-                <form action="/treks/<%=trek._id%>/enroll?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <form action="/treks/<%=trek._id%>/enroll?_method=PUT" method="POST" novalidate class="validated-form">
                      <div class="mb-3">
                         <label for="f_name">Full Name</label>
                         <input class="form-control" type="text" id="f_name" name="enroll[full_name]" placeholder="Full Name" required>     
