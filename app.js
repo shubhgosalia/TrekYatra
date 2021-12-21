@@ -6,28 +6,31 @@ const path = require("path");
 const ejsmate = require("ejs-mate");
 const mongoose = require("mongoose");
 const Trek = require("./models/treks");
-const catchAsync = require('./utils/catchAsync')
-const ExpressError=require('./utils/ExpressError')
+const Enroll=require("./models/enroll");
+const catchAsync = require('./utils/catchAsync');
+const ExpressError=require('./utils/ExpressError');
 const methodOverride = require("method-override");
-const {trekSchema,reviewSchema}=require('./schema');
+const {trekSchema,reviewSchema,enrollSchema}=require('./schema');
 const Review=require('./models/review');
 const { nextTick } = require("process");
 const passport=require("passport");
 const loc_strategy=require("passport-local");
 const User=require("./models/user");
 const treks=require('./routes/trekRoutes');
+const enrolls=require('./routes/trekRoutes');
 const reviews=require('./routes/reviewRoutes');
 const session=require('express-session');
 const flash=require('connect-flash');
 const users=require("./routes/userRoutes");
 const mongoSanitize=require('express-mongo-sanitize');
 
+
 var stripe = require('stripe')(process.env.Secret_Key);
   
 var Publishable_Key =process.env.Publishable_Key
 var Secret_Key = process.env.Secret_Key
+ 
 
-  
 mongoose.connect("mongodb://localhost:27017/trek-yatra",
     err => {
         if (err) throw err;
@@ -109,6 +112,7 @@ app.get("/fakeUser",async(req,res)=>{
 app.use('/',users);
 app.use('/treks',treks);
 app.use('/treks/:id/reviews',reviews);
+app.use('treks/:id/enroll',enrolls);
 
 app.get('/',(req,res)=>{
     res.render('landing');

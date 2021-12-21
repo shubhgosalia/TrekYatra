@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Trek = require('../models/treks');
-const cities = require('./cities');
-const { places, descriptors } = require('./trek_title');
+//const cities = require('./cities');
+//const { places, descriptors } = require('./trek_title');
 
 
 mongoose.connect("mongodb://localhost:27017/trek-yatra",

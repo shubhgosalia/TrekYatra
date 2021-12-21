@@ -1,0 +1,89 @@
+<%layout('layouts/boilerplate')%>
+
+        <div class="row">
+            <h1 class="text-center text-muted"><%=trek.title%> Enrollment</h1>
+            <div class="col-md-6 offset-md-3 pt-3">
+                <form action="/treks/<%=trek._id%>/enroll?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                     <div class="mb-3">
+                        <label for="f_name">Full Name</label>
+                        <input class="form-control" type="text" id="f_name" name="enroll[full_name]" placeholder="Full Name" required>     
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                    <label for="birthday">DOB</label>
+                    <input class="form-control" type="date" id="birthday" name="enroll[dob]" required>
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
+                    </div>  
+
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="enroll[user_email]" placeholder="Email" required>
+                        <div class="valid-feedback">
+                            Looks-good!
+                        </div>
+                </div>    
+
+                      <div class="mb-3">
+                      <label for="city">Your City</label>
+                      <br>
+                        <select class="form-control" id="city" name="enroll[city]" required>
+                        <option>Choose City</option>
+                        <option value="ahm">Ahmedabad</option>
+                        <option value="bng">Bangalore</option>
+                        <option value="chn">Chennai</option>
+                        <option value="del">Delhi</option>
+                        <option value="hyd">Hyderabad</option>
+                        <option value="kol">Kolkata</option>
+                        <option value="mum">Mumbai</option>
+                        <option value="pun">Pune</option>
+                        <option value="vis">Visakhapatnam</option>
+                        <option value="pat">Patna</option>
+                        <option value="ahm">Ahmedabad</option>
+                        <option val="ran">Ranchi</option>
+                        <option value="coch">Cochin</option>
+                        <option value="tri">Trivandrum</option>
+                        <option value="bho">Bhopal</option>
+                        <option value="gwa">Gwalior</option>
+                        <option value="ind">Indore</option>
+                        <option value="aur">Aurangabad</option>
+                        <option value="nag">Nagpur</option>
+                        <option value="nasik">Nasik</option>
+                        <option value="chd">Chandigarh</option>
+                        <option value="jal">Jalandhar</option>
+                        <option value="jpr">Jaipur</option>
+                        <option value="jslmr">Jaisalmer</option>
+                        <option value="jdh">Jodhpur</option>
+                        <option value="com">Coimbatore</option>
+                        <option value="knpur">Kanpur</option>
+                        <option value="luck">Lucknow</option>
+                        <option value="vrnasi">Varanasi</option>
+                        <option value="deh">Dehradun</option>
+                        <option value="roor">Roorkee</option>
+                        <option value="khgpur">Kharagpur</option>
+                        <option value="other">Other</option>
+                       </select>
+                </div>                  
+       
+                          <div class="mb-3">
+                      <label for="travelled">Have you trekked with <%=trek.organization%> before?</label>
+                      <br>
+                        <select class="form-control" id="travelled" name="enroll[isTrekked]" required>
+                        <option>Choose Option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                       </select>
+                </div>                  
+       
+
+                    <div class="mb-3">
+                        <button class="btn btn-success">Enroll</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+

@@ -1,6 +1,6 @@
 const Trek = require("../models/treks");
 const {cloudinary}=require('../cloudinary');
-
+const Enroll=require("../models/enroll");
 const mbxGeocoding=require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken=process.env.MAPBOX_TOKEN;
 const geocoder=mbxGeocoding({accessToken:mapBoxToken});
@@ -39,6 +39,19 @@ module.exports.createTrek=async (req, res, next) => {
     res.redirect(`/treks/${trek._id}`)
 }
 
+module.exports.newEnrollment=async(req,res,next)=>{
+
+    const trek=await Trek.findById(req.params.id);
+    console.log(req.body);
+    const enrolled_user = new Enroll(req.body.enroll);
+    //enrolled_user.enrolled_trek=req.trek._id;
+    await enrolled_user.save();
+    console.log(enrolled_user);
+    req.flash('success','Enrolled Successfully! Check Your mail!');
+    res.redirect(`/treks/${trek._id}/enroll`)
+
+}
+
 module.exports.showTrek=async (req, res) => {
     const trek = await Trek.findById(req.params.id).populate({
         path:'reviews',
@@ -54,35 +67,41 @@ module.exports.showTrek=async (req, res) => {
     res.render("treks/show", { trek,msg:req.flash('success'),key:Publishable_Key});
 }
 
-module.exports.enrollPayment=async(req,res) => {
-    stripe.customers.create({
-        email: req.body.stripeEmail,
-        source: req.body.stripeToken,
-        name: 'Gourav Hammad',
-        address: {
-            line1: 'TC 9/4 Old MES colony',
-            postal_code: '452331',
-            city: 'Indore',
-            state: 'Madhya Pradesh',
-            country: 'India',
-        }
-    })
-    .then((customer) => {
-  
-        return stripe.charges.create({
-            amount: 2500,
-            description: 'Web Development Product',
-            currency: 'INR',
-            customer: customer.id
-        });
-    })
-    .then((charge) => {
-        res.send("Success")  // If no error occurs
-    })
-    .catch((err) => {
-        res.send(err)       // If some error occurs
-    });
+module.exports.enrollTrek=async(req,res)=>{
+    const trek=await Trek.findById(req.params.id);
+    res.render("treks/enroll", {trek});
+
 }
+
+//module.exports.enrollPayment=async(req,res) => {
+   // stripe.customers.create({
+      //  email: req.body.stripeEmail,
+      //  source: req.body.stripeToken,
+      //  name: 'Gourav Hammad',
+       // address: {
+         //   line1: 'TC 9/4 Old MES colony',
+          //  postal_code: '452331',
+         //   city: 'Indore',
+          //  state: 'Madhya Pradesh',
+         //   country: 'India',
+        //}
+    //})
+    //.then((customer) => {
+  
+       // return stripe.charges.create({
+       //     amount: 2500,
+       //     description: 'Web Development Product',
+        //    currency: 'INR',
+         //   customer: customer.id
+       // });
+   // })
+  //  .then((charge) => {
+    //    res.send("Success")  // If no error occurs
+  //  })
+   // .catch((err) => {
+   //     res.send(err)       // If some error occurs
+    //});
+//}
 
 module.exports.renderEditForm=async (req, res) => {
     const {id}=req.params;

@@ -60,6 +60,11 @@
     <%}%>
          <%if(currentUser && !trek.author.equals(currentUser._id)) {%>
         <div class="card-body">
+          <a class="d-inline" href="/treks/<%=trek._id%>/enroll">
+            <button class="btn btn-primary">Enroll In Trek</button>
+          </a>
+        </div>
+        <!--<div class="card-body">
           <form class="d-inline" action="/payment" method="POST">
           <script 
           src="//checkout.stripe.com/v2/checkout.js"
@@ -73,6 +78,7 @@
         </script>
           </form>
         </div>
+        -->
     <%}%>
 
         <div class="card-footer text-muted">
