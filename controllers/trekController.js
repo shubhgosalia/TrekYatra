@@ -12,7 +12,34 @@ var Secret_Key = process.env.Secret_Key
 
 
 module.exports.index=async (req, res) => {
-    const treks = await Trek.find({});
+    let treks=[];
+    const term=req.query;
+    console.log(term);
+    console.log(term.search);
+    if(term.search){
+        treks = await Trek.find({});
+        // console.log(treks);
+
+        treks=treks.filter(trek =>{
+            if(trek.search==='') return 1;
+            return trek.title.toLowerCase().includes(term.search.trim().toLowerCase());
+        })
+        // console.log(treks);
+
+    }
+    else if(term.sortby=="priceLow"){
+        treks=await Trek.find({}).sort({price: 1})
+
+        console.log(treks);
+    }
+    else if(term.sortby=="priceHigh"){
+        treks=await Trek.find({})
+        .sort({price: -1})
+    }
+    else{
+        treks = await Trek.find({});
+    }
+    
     res.render("treks/index", { treks });
 }
 
