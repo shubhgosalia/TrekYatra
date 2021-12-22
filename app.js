@@ -24,13 +24,7 @@ const flash=require('connect-flash');
 const users=require("./routes/userRoutes");
 const mongoSanitize=require('express-mongo-sanitize');
 
-
-var stripe = require('stripe')(process.env.Secret_Key);
-  
-var Publishable_Key =process.env.Publishable_Key
-var Secret_Key = process.env.Secret_Key
  
-
 mongoose.connect("mongodb://localhost:27017/trek-yatra",
     err => {
         if (err) throw err;
@@ -89,20 +83,6 @@ app.use((req,res,next)=>{
     next();
 })
 
-//app.post("/payment/:id",async(req,res)=>{
-   // const trek=await Trek.findById(req.params.id);
-
-   // var options = {
-    //    amount: `${trek.price}`,
-    //    currency: "INR",
-    //    receipt: "order_rcptid_11"
-     // };
-    //  instance.orders.create(options, function(err, order) {
-     //   console.log(order);
-     //   res.send({orderId:order.id});
-     // });      
-//})
-
 app.get("/fakeUser",async(req,res)=>{
     const user=new User({email:"a@gmail.com",username:"aa"});
     const newUser=await User.register(user,"aab");
@@ -128,11 +108,6 @@ app.use((err, req, res, next) => {
     res.status(statuscode).render('treks/error.ejs',{err});
 });
 
-//app.post('/payment', function(req, res){
-  
-    // Moreover you can take more details from user
-    // like Address, Name, etc from form
-//})
 
 app.listen(3000, () => {
     console.log("Serving on port 3000");

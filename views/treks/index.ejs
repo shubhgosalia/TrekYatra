@@ -2,7 +2,6 @@
 
 <div id="cluster-map" class="mb-5"></div>
 <div class="container" style="width:95%">
-<h3 class="text-muted mb-3" style="margin-left:35px;">All Treks</h3>
     <nav class="navbar navbar-expand-sm navbar-light bg-light py-3 py-md-2">
     <div class="container">
         <ul class="navbar-nav">
@@ -31,8 +30,10 @@
         
     </div>
   </nav>
-
+   <br>
+   <br>
     <ul>
+
         <% for(let trek of treks){%>
             <div class="card mb-4">
                 <div class="row">
@@ -55,13 +56,14 @@
                             <p class="card-text">
                                 Date: <%=trek.start_date%> to <%=trek.end_date%>
                             </p>
-                            <p class="card-text">
+                           <!-- <p class="card-text">
                                 <p>
                                 <%=trek.location%>
                                 </p>
                             </p>
+                            -->
                             <p class="card-text ">
-                                Rs <%=trek.price%>
+                                &#x20B9 <%=trek.price%>
                             </p>
                             <a class="btn btn-primary" href="/treks/<%=trek._id%>">View <%=trek.title%></a>
                         </div>
