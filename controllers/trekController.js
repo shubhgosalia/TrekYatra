@@ -40,8 +40,10 @@ const oAuth2Client = new google.auth.OAuth2(
  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
  
 
-async function sendMail(receiver){
+async function sendMail(receiver,filename,url){
       try{
+          console.log(filename);
+          console.log(url);
           const accessToken=await oAuth2Client.getAccessToken()
           const transport=nodemailer.createTransport({
               service:'gmail',
@@ -59,9 +61,15 @@ async function sendMail(receiver){
             from: 'TrekYatra <shubh.gosalia@somaiya.edu>',
             to: receiver,
             subject: 'TrekYatra:Trek Enrollment',
-            text: `<p>You have enrolled successfully!</p>`,
-            html: `<p>You have enrolled successfully!</p>`,
-         }
+            text: `<p>Kindly Click <a href=${url}>Get itenerary</a> </p>`,
+            html: `<p>Kindly Click <a href=${url}>Get itenerary</a> </p>`,
+            // attachments: [{
+            //     filename: `${filename}`,
+            //     path: `${url}`,
+            //     contentType: 'application/pdf'
+            // }],
+            
+        }
 
          const result = await transport.sendMail(mailOptions)
          return result
@@ -139,13 +147,14 @@ module.exports.createTrek=async (req, res, next) => {
  
     const trek = new Trek(req.body.trek);
     trek.geometry=await geodata.body.features[0].geometry;
-    trek.images= req.files.map(f=>({url:f.path,filename:f.filename}));   
-    console.log(req.files);
-    trek.file=req.files.map(f=>({url:f.path,filename:f.filename}));
-    console.log(trek.file);
+    trek.images= req.files.image.map(f=>({url:f.path,filename:f.filename}));   
+    // console.log(`Image Information is ${req.files.image}`);
+    trek.file=req.files.itenerary.map(f=>({url:f.path,filename:f.filename}));
+    // console.log(trek.file);
     trek.author=req.user._id;
+    // console.log(trek.file.url)
     await trek.save();
-    console.log(trek);
+    // console.log(trek);
     req.flash('success','Successfully added a new Trek!');
     res.redirect(`/treks/${trek._id}`)
 }
@@ -166,8 +175,10 @@ module.exports.newEnrollment=async(req,res,next)=>{
           enroll_user_email:enrolled_user.user_email,
     }
     const token=jwt.sign(payload,secret,{expiresIn:'15m'})
+    const filename=trek.file.map(f=>(f.filename))
+    const url=trek.file.map(f=>(f.url))
     req.flash('success','Enrolled Successfully! Check Your mail!');
-    sendMail(enroll_user_email).then((result)=>
+    sendMail(enroll_user_email,filename,url).then((result)=>
        console.log('Email has been sent....',result),
     )
     res.redirect(`/treks/${trek._id}/enroll`)

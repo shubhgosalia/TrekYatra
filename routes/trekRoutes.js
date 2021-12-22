@@ -24,7 +24,9 @@ const validateTrek=(req,res,next)=>{
 
 router.route('/')
   .get(catchAsync(trekController.index))
-  .post(isLoggedIn,upload.array('image'),upload.single('itenerary'),validateTrek,catchAsync(trekController.createTrek))
+  // .post(isLoggedIn,upload.array('image'),upload.single('itenerary'),validateTrek,catchAsync(trekController.createTrek))
+  .post(isLoggedIn,upload.fields([{ name: 'image'}, {name: 'itenerary'}]),validateTrek,catchAsync(trekController.createTrek))
+  
   // .post(upload.single('image'),(req,res)=>{
   //     res.send(req.body,req.file)
   //   }
