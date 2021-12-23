@@ -165,7 +165,6 @@ module.exports.createTrek=async (req, res, next) => {
 
 
 module.exports.newEnrollment=async(req,res,next)=>{
-    //console.log(req.body);
     const trek=await Trek.findById(req.params.id);
     const enrolled_user = new Enroll(req.body.enroll);
     enrolled_user.enrolled_trek=req.params.id;
