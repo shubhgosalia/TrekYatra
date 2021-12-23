@@ -224,6 +224,11 @@ module.exports.updateTrek=async (req, res) => {
     console.log(req.body);
     const trek= await Trek.findByIdAndUpdate(id, { ...req.body.trek });
     console.log(req.files)
+    const geodata=await geocoder.forwardGeocode({
+        query:req.body.trek.location,
+        limit:1,
+    }).send()
+    trek.geometry=await geodata.body.features[0].geometry;
     if(req.files.image!=null)
     {
         const imgs=req.files.image.map((f)=>({url:f.path,filename:f.filename}))
