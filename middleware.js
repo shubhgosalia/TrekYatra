@@ -3,6 +3,7 @@ const Trek=require('./models/treks');
 const ExpressError=require('./utils/ExpressError');
 const {reviewSchema}=require('./schema');
 const Review=require('./models/review');
+const Enroll=require('./models/enroll');
 
 module.exports.isLoggedIn=(req,res,next)=>{
     if(!req.isAuthenticated()){
@@ -33,6 +34,33 @@ module.exports.isAuthorReview=async(req,res,next)=>{
      next();
 }
 
+module.exports.isEnrolled=async(req,res,next)=>{
+    try{
+        const {id}=req.params;
+        const enroll_user=await Enroll.find({enrolled_trek:req.params.id})
+        const enroll_count=await Enroll.find({enrolled_trek:req.params.id}).count()
+        //console.log(enroll_user);
+        //console.log(enroll_user[0]);
+        //console.log(enroll_count);
+        // console.log(req.user.email)
+        //console.log(enroll_user[0].user_email)
+        for(let i=0;i<enroll_count;i++)
+        {
+            if(req.user.email===enroll_user[i].user_email)
+            {
+                req.flash("error","Oops! You have already enrolled in this trek!");
+                return res.redirect(`/treks/${id}`);
+    
+            }
+        }        
+        
+        next();
+        
+    } catch(error){
+        console.log(error)
+    }
+
+}
 
 module.exports.validateReview=(req,res,next)=>{
     const {error}=reviewSchema.validate(req.body);

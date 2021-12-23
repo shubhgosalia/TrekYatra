@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
     cloudinary, //type of dest of cloudinary
     params: {
         folder: 'trek-yatra',
-        allowedformats: ['png','jpeg','jpg'], 
+        allowedformats: ['png','jpeg','jpg','pdf'], 
     },    
 });
 

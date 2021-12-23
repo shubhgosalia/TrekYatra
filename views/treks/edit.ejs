@@ -51,14 +51,14 @@
                         </div>    
                     </div>      
                     <div class="mb-3">
-                        <label class="form-label" for="description">description</label>
+                        <label class="form-label" for="description">Description</label>
                         <textarea type="text" class="form-control" id="description" name="trek[description]" required ><%=trek.description%></textarea> 
                         <div class="valid-feedback">
                             Looks-good!
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Add images:</label>
+                        <label for="formFileMultiple" class="form-label">Add images</label>
                         <input class="form-control" type="file" id="image" name="image" multiple>
                     </div>
                 
@@ -71,12 +71,24 @@
                             <label for="image-<%=i%>">Delete?</label>                            
                         <% })%>        
                     </div>
-                    
+
                 <div class="mb-3">
-                    <label class="form-label" for="example">Attach Itenerary</label>
-                    <input type="file" class="form-control" id="example" name="itenerary" accept=".pdf,.docx"/>
+                    <label class="form-label" for="formFile">Attach Itenerary</label>
+                    <input type="file" class="form-control" id="itenerary" name="itenerary"/>
                 </div>
 
+                    
+               <div class="mb-3">
+                            <% trek.file.forEach((file,i)=>{%>
+                        <img src="<%=file.thumbnail%>"class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="itenerary-<%=i%>" name="deleteFile[]" value="<%=file.filename%>">
+                            </div>
+                            <label for="itenerary-<%=i%>">Delete?</label>                            
+                        <% })%>        
+
+                </div>
+           
                     <div class="mb-3">
                         <button class="btn btn-success">Update Trek</button>
                     </div>

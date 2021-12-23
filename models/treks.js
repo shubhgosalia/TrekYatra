@@ -16,6 +16,11 @@ ImageSchema.virtual('thumbnail').get(function(){
     return this.url.replace('/upload','/upload/w_200');
 });
 
+fileSchema.virtual('thumbnail').get(function(){
+    return this.url.replace('/upload','/upload/w_200');
+});
+
+
 const opts={toJSON:{virtuals:true}};
 
 const TrekSchema=new Schema({

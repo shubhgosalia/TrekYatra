@@ -12,7 +12,9 @@ module.exports.trekSchema=Joi.object({
         location:Joi.string().required(),
         description:Joi.string().required(),
     }).required(),
-    deleteImages:Joi.array()
+    deleteImages:Joi.array(),
+    deleteFile:Joi.array()
+
 })
 
 module.exports.enrollSchema=Joi.object({

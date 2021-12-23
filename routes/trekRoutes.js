@@ -3,7 +3,7 @@ const router=express.Router();
 const catchAsync = require('../utils/catchAsync');
 const Trek = require("../models/treks");
 const trekController=require('../controllers/trekController');
-const {isLoggedIn,isAuthor}=require('../middleware');
+const {isLoggedIn,isAuthor,isEnrolled}=require('../middleware');
 const {storage}=require('../cloudinary');
 const multer=require('multer');
 const upload=multer({storage});
@@ -37,14 +37,14 @@ router.route('/new')
 
 router.route('/:id')
   .get(catchAsync(trekController.showTrek))
-  .put(isLoggedIn,isAuthor,upload.array('image'),validateTrek,catchAsync( trekController.updateTrek))
+  .put(isLoggedIn,isAuthor,upload.fields([{ name: 'image'}, {name: 'itenerary'}]),validateTrek,catchAsync( trekController.updateTrek))
   .delete(isLoggedIn,isAuthor, catchAsync(trekController.deleteTrek))
 
 router.route('/:id/edit')
   .get(isLoggedIn,isAuthor,catchAsync(trekController.renderEditForm));
 
 router.route('/:id/enroll')
-  .get(isLoggedIn,catchAsync(trekController.enrollTrek))
+  .get(isLoggedIn,isEnrolled,catchAsync(trekController.enrollTrek))
   .put(isLoggedIn,catchAsync(trekController.newEnrollment))
 
 //router.route('/:id/user_enrolled')

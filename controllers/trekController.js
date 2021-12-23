@@ -40,7 +40,7 @@ const oAuth2Client = new google.auth.OAuth2(
  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
  
 
-async function sendMail(receiver,filename,url){
+async function sendMail(receiver,filename,url,title){
       try{
           console.log(filename);
           console.log(url);
@@ -60,9 +60,11 @@ async function sendMail(receiver,filename,url){
           const mailOptions = {
             from: 'TrekYatra <shubh.gosalia@somaiya.edu>',
             to: receiver,
-            subject: 'TrekYatra:Trek Enrollment',
-            text: `<p>Kindly Click <a href=${url}>Get itenerary</a> </p>`,
-            html: `<p>Kindly Click <a href=${url}>Get itenerary</a> </p>`,
+            subject: `TrekYatra : ${title} Enrollment`,
+            text: `<p>Kindly Click <a href=${url}>here</a> to get the Itenerary!</p>
+              Details regarding payment would be conveyed soon! Thanks for exploring with TrekYatra!`,
+            html: `<p>Kindly Click <a href=${url}>here</a> to get the Itenerary!</p>
+            Details regarding payment would be conveyed soon! Thanks for exploring with TrekYatra!`,
             // attachments: [{
             //     filename: `${filename}`,
             //     path: `${url}`,
@@ -178,10 +180,10 @@ module.exports.newEnrollment=async(req,res,next)=>{
     const filename=trek.file.map(f=>(f.filename))
     const url=trek.file.map(f=>(f.url))
     req.flash('success','Enrolled Successfully! Check Your mail!');
-    sendMail(enroll_user_email,filename,url).then((result)=>
+    sendMail(enroll_user_email,filename,url,trek.title).then((result)=>
        console.log('Email has been sent....',result),
     )
-    res.redirect(`/treks/${trek._id}/enroll`)
+    res.redirect(`/treks/${trek._id}`)
 
 }
 
@@ -222,8 +224,18 @@ module.exports.updateTrek=async (req, res) => {
     const { id } = req.params;
     console.log(req.body);
     const trek= await Trek.findByIdAndUpdate(id, { ...req.body.trek });
-    const imgs=req.files.map((f)=>({url:f.path,filename:f.filename}))
-    trek.images.push(...imgs)
+    console.log(req.files)
+    if(req.files.image!=null)
+    {
+        const imgs=req.files.image.map((f)=>({url:f.path,filename:f.filename}))
+        trek.images.push(...imgs)
+
+    }
+    if(req.files.itenerary!=null)
+    {
+        const fl=req.files.itenerary.map((f)=>({url:f.path,filename:f.filename}))
+        trek.file.push(...fl)
+    }
     await trek.save();
     if(req.body.deleteImages){
         for(let filename of req.body.deleteImages){
@@ -231,7 +243,14 @@ module.exports.updateTrek=async (req, res) => {
         }
         await trek.updateOne({$pull :{images:{filename:{$in:req.body.deleteImages}}}})
     }
-    
+
+   if(req.body.deleteFile){
+        for(let filename of req.body.deleteFile){
+            await cloudinary.uploader.destroy(filename);
+        }
+        await trek.updateOne({$pull :{file:{filename:{$in:req.body.deleteFile}}}})
+    }
+ 
     req.flash('success','Successfully updated the trek!');
     res.redirect(`/treks/${trek._id}`);
 }
