@@ -68,7 +68,7 @@ node app.js
 ```
 
  
- # Screenshots of Project
+ # Screenshots of the Project
 ![Capture](https://user-images.githubusercontent.com/75128988/147271533-5e06a3c6-6f9e-4ecb-a02c-15a50636c7a2.JPG)
 <br>
 ![Capture](https://user-images.githubusercontent.com/75128988/147271924-da49ac3b-c534-4990-8c27-64f044f7fbae.JPG)
