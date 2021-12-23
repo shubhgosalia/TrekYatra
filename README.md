@@ -69,15 +69,15 @@ node app.js
 
  
  # Screenshots of the Project
-![Capture](https://user-images.githubusercontent.com/75128988/147271533-5e06a3c6-6f9e-4ecb-a02c-15a50636c7a2.JPG)
-<br>
 ![Capture](https://user-images.githubusercontent.com/75128988/147271924-da49ac3b-c534-4990-8c27-64f044f7fbae.JPG)
-<br>
-![Capture](https://user-images.githubusercontent.com/75128988/147272922-77849516-b837-4402-9776-11680acad696.JPG)
 <br>
 ![Capture](https://user-images.githubusercontent.com/75128988/147272049-ea303140-8246-4216-aed3-5b314bbc5f7a.JPG)
 <br>
+![Capture](https://user-images.githubusercontent.com/75128988/147271533-5e06a3c6-6f9e-4ecb-a02c-15a50636c7a2.JPG)
+<br>
 ![Capture](https://user-images.githubusercontent.com/75128988/147272197-e673959c-a458-420a-8a62-ba9b6498d0b1.JPG)
+<br>
+![Capture](https://user-images.githubusercontent.com/75128988/147272922-77849516-b837-4402-9776-11680acad696.JPG)
 <br>
 ![Capture](https://user-images.githubusercontent.com/75128988/147272316-dc00556e-d7db-4876-aa2c-6585ea22e1c3.JPG)
 <br>
