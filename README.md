@@ -10,9 +10,11 @@ TrekYatra is a goto website for small trek organizers to put up their treks. Use
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E">
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
- - Cloudinary Used for storing uploaded images
- - MapBox for showing maps
 </span>
+
+# Additional Tools
+ - Cloudinary used for storing uploaded images
+ - MapBox for showing maps
 
 # Features
 - Login/Register
