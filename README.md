@@ -1,5 +1,5 @@
 # TrekYatra
-TrekYatra is a goto website for small trek organizers to put up their treks. Users can enroll in different treks and can review and rate the treks.It enables people from accross the globe to explore new trekking experiences. It guides the users about the pros and cons of being a part of a particular trek.
+TrekYatra is a goto website for small trek organizers to put up their treks. Users can enroll in different treks and can review and rate the treks.It enables people from across the globe to explore new trekking experiences. It guides the users about the pros and cons of being a part of a particular trek.
 
 # Technologies Used
 <span>
